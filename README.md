@@ -1,0 +1,2 @@
+# EasyResumeAI
+Make resumes simpler
