@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import {
   Smartphone,
   LayoutDashboard,
@@ -11,6 +12,7 @@ import {
   Pencil,
   History,
   MessageSquare,
+  ThumbsUp,
 } from "lucide-react"
 
 export function SideNav() {
@@ -26,41 +28,16 @@ export function SideNav() {
         <NavItem icon={<MessageSquare className="h-5 w-5" />} label="Help" href="#" />
       </div>
       <div className="flex-1 flex flex-col overflow-hidden">
-        <div className="py-3 px-2 space-y-2">
-          <CategoryItem icon={<Smartphone className="h-6 w-6" />} label="Mobile App" className="bg-gray-100" />
-          <CategoryItem icon={<LayoutDashboard className="h-6 w-6" />} label="Dashboard" />
-        </div>
-        <div className="flex-1 overflow-y-auto py-3 px-2">
+        <div className="flex-1 overflow-y-auto py-3 px-2 [&::-webkit-scrollbar]:hidden">
           <div className="space-y-2">
-            <CategoryItem icon={<Briefcase className="h-6 w-6" />} label="Portfolio" />
-            <CategoryItem icon={<LayoutLanding className="h-6 w-6" />} label="Landing Page" />
-            <ProjectItem dots={["bg-gray-300", "bg-blue-400", "bg-blue-500"]} stats="2282" time="1 yr" />
-            <ProjectItem
-              dots={["bg-gray-900", "bg-blue-400", "bg-blue-500"]}
-              title="Electric City Nights"
-              stats="2099"
-              time="1 yr"
-            />
-            <ProjectItem dots={["bg-purple-400", "bg-purple-500", "bg-purple-600"]} />
-            {/* Additional project items to demonstrate scrolling */}
-            <ProjectItem
-              dots={["bg-green-400", "bg-green-500", "bg-green-600"]}
-              title="Nature Explorer"
-              stats="1854"
-              time="2 yrs"
-            />
-            <ProjectItem
-              dots={["bg-red-400", "bg-red-500", "bg-red-600"]}
-              title="Fitness Tracker"
-              stats="1632"
-              time="1 yr"
-            />
-            <ProjectItem
-              dots={["bg-yellow-400", "bg-yellow-500", "bg-yellow-600"]}
-              title="Recipe Book"
-              stats="1421"
-              time="6 mo"
-            />
+            <ProjectItem title="简历推荐" likes={256} />
+            <ProjectItem title="简历推荐" likes={128} />
+            <ProjectItem title="简历推荐" likes={96} />
+            <ProjectItem title="简历推荐" likes={64} />
+            <ProjectItem title="简历推荐" likes={48} />
+            <ProjectItem title="简历推荐" likes={32} />
+            <ProjectItem title="简历推荐" likes={24} />
+            <ProjectItem title="简历推荐" likes={16} />
           </div>
         </div>
       </div>
@@ -110,31 +87,31 @@ function CategoryItem({
 }
 
 function ProjectItem({
-  dots = [],
-  title,
-  stats,
-  time,
+  title = "简历标题",
+  time = "最后更新时间",
+  imageUrl = "/placeholder-resume.jpg",
+  likes = 128,
 }: {
-  dots: string[]
   title?: string
-  stats?: string
   time?: string
+  imageUrl?: string
+  likes?: number
 }) {
   return (
-    <div className="p-2 rounded-xl hover:bg-gray-50">
-      <div className="flex gap-1 mb-1.5">
-        {dots.map((color, i) => (
-          <div key={i} className={`w-1.5 h-1.5 rounded-full ${color}`} />
-        ))}
-      </div>
-      {title && <div className="text-xs text-gray-500 mb-1">{title}</div>}
-      {stats && time && (
-        <div className="flex items-center gap-1 text-[10px] text-gray-400">
-          <Heart className="h-2.5 w-2.5" />
-          <span>{stats}</span>
-          <span>{time}</span>
+    <div className="p-2 rounded-xl hover:bg-gray-50 cursor-pointer">
+      <div className="relative w-full h-32 mb-2 rounded-lg overflow-hidden">
+        <div className="absolute inset-0 bg-gray-100">
+          <div className="w-full h-full flex items-center justify-center text-gray-400">
+            {/* 如果没有图片则显示预览图标 */}
+            <Eye className="h-6 w-6" />
+          </div>
         </div>
-      )}
+      </div>
+      <div className="text-sm font-medium text-gray-700 mb-1">{title}</div>
+      <div className="flex items-center text-gray-400">
+        <ThumbsUp className="h-3.5 w-3.5 mr-1" />
+        <span className="text-xs">{likes}</span>
+      </div>
     </div>
   )
 }
