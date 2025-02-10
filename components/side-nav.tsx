@@ -1,5 +1,8 @@
+'use client'
+
 import Link from "next/link"
 import Image from "next/image"
+import { usePathname } from "next/navigation"
 import {
   Smartphone,
   LayoutDashboard,
@@ -16,16 +19,41 @@ import {
 } from "lucide-react"
 
 export function SideNav() {
+  const pathname = usePathname()
+  
   return (
     <nav className="w-[240px] bg-white border-r h-screen flex">
       <div className="w-[72px] flex flex-col items-center py-3 border-r">
-        <NavItem icon={<Plus className="h-5 w-5" />} label="New" href="#" />
-        <NavItem icon={<TrendingUp className="h-5 w-5" />} label="Top" href="#" />
-        <NavItem icon={<Heart className="h-5 w-5" />} label="Saved" href="#" />
-        {/* <NavItem icon={<Eye className="h-5 w-5" />} label="Views" href="#" isActive />
-        <NavItem icon={<Pencil className="h-5 w-5" />} label="Edit" href="#" /> */}
-        <NavItem icon={<History className="h-5 w-5" />} label="History" href="#" />
-        <NavItem icon={<MessageSquare className="h-5 w-5" />} label="Help" href="#" />
+        <NavItem 
+          icon={<Plus className="h-5 w-5" />} 
+          label="New" 
+          href="/dashboard/new" 
+          isActive={pathname === '/dashboard/new'} 
+        />
+        <NavItem 
+          icon={<TrendingUp className="h-5 w-5" />} 
+          label="Top" 
+          href="/dashboard/top"
+          isActive={pathname === '/dashboard/top'} 
+        />
+        <NavItem 
+          icon={<Heart className="h-5 w-5" />} 
+          label="Saved" 
+          href="/dashboard/saved"
+          isActive={pathname === '/dashboard/saved'} 
+        />
+        <NavItem 
+          icon={<History className="h-5 w-5" />} 
+          label="History" 
+          href="/dashboard/history"
+          isActive={pathname === '/dashboard/history'} 
+        />
+        <NavItem 
+          icon={<MessageSquare className="h-5 w-5" />} 
+          label="Help" 
+          href="/dashboard/help"
+          isActive={pathname === '/dashboard/help'} 
+        />
       </div>
       <div className="flex-1 flex flex-col overflow-hidden">
         <div className="flex-1 overflow-y-auto py-3 px-2 [&::-webkit-scrollbar]:hidden">
